@@ -1,5 +1,7 @@
-
 using CodeFirstDb.Data;
+using CodeFirstDb.Dtos.StudentsDto;
+using CodeFirstDb.Endpoints.StudentEndpointsFolder;
+using CodeFirstDb.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstDb
@@ -18,7 +20,11 @@ namespace CodeFirstDb
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<SchoolDbContext>(option =>
+            
+            
+            
+            
+            builder.Services.AddDbContext<SchoolDbContext>(option => // dependency injection, meaning that the SchoolDbContext will be injected into the lambda expression
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
 
@@ -37,6 +43,12 @@ namespace CodeFirstDb
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            // dependency injection, meaning that the WebApplication will be injected into the RegisterEndpoints method
+            // RegisterEndpoints is a method that registers the endpoints
+            StudentEndpoints.RegisterEndpoints(app);
+
+
 
 
             app.Run();

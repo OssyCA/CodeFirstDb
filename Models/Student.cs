@@ -10,6 +10,7 @@ namespace CodeFirstDb.Models
         [StringLength(35, MinimumLength = 5)]
         public string Name{ get; set; }
         [StringLength(100)]
+        [EmailAddress]
         public string Email { get; set; } // Email property
 
         [ForeignKey("Class")] // Foreign key attribute
